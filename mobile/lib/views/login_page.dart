@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = theme.textTheme;
+    final ColorScheme colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -16,70 +19,63 @@ class LoginPage extends StatelessWidget {
           children: [
             Text(
               "Welcome!",
-              style: GoogleFonts.montserrat().copyWith(
-                fontSize: 26,
-                fontWeight: FontWeight.w600,
-                color: const Color(0xFF4CAF50),
+              style: textTheme.headlineLarge!.copyWith(
+                color: colorScheme.secondary,
               ),
             ),
             const SizedBox(
               height: 82,
             ),
             TextField(
-              style: GoogleFonts.montserrat().copyWith(
-                color: const Color(0xFF323941),
-                fontSize: 16,
+              style: textTheme.labelMedium!.copyWith(
+                color: const Color(0xFF171717),
               ),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 20,
                   horizontal: 16,
                 ),
-                enabledBorder: const OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0xFF4CAF50),
+                    color: colorScheme.primaryContainer,
                   ),
                 ),
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0xFF4CAF50),
+                    color: colorScheme.primaryContainer,
                   ),
                 ),
                 labelText: "Email/Phone number",
-                labelStyle: GoogleFonts.montserrat().copyWith(
-                  color: const Color(0xFF323941),
-                  fontSize: 16,
-                ),
+                labelStyle: textTheme.labelMedium,
+                floatingLabelStyle: textTheme.labelMedium,
               ),
             ),
             const SizedBox(
               height: 15,
             ),
             TextField(
-              style: GoogleFonts.montserrat().copyWith(
-                color: const Color(0xFF323941),
+              style: textTheme.labelMedium!.copyWith(
                 fontSize: 16,
+                color: const Color(0xFF171717),
               ),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 20,
                   horizontal: 16,
                 ),
-                enabledBorder: const OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0xFF4CAF50),
+                    color: colorScheme.primaryContainer,
                   ),
                 ),
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0xFF4CAF50),
+                    color: colorScheme.primaryContainer,
                   ),
                 ),
                 labelText: "Password",
-                labelStyle: GoogleFonts.montserrat().copyWith(
-                  color: const Color(0xFF323941),
-                  fontSize: 16,
-                ),
+                labelStyle: textTheme.labelMedium,
+                floatingLabelStyle: textTheme.labelMedium,
               ),
             ),
             const SizedBox(
@@ -98,9 +94,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   child: Text(
                     "Forgot your password?",
-                    style: GoogleFonts.montserrat().copyWith(
+                    style: textTheme.bodyMedium!.copyWith(
                       color: const Color(0xFF545454),
-                      fontSize: 15,
                     ),
                   ),
                 ),
@@ -121,15 +116,14 @@ class LoginPage extends StatelessWidget {
                       Radius.circular(15),
                     ),
                   ),
-                  backgroundColor: const Color(0xFF4CAF50),
+                  backgroundColor: colorScheme.primaryContainer,
                   padding: const EdgeInsets.all(17),
                 ),
                 child: Text(
                   "Log in",
-                  style: GoogleFonts.montserrat().copyWith(
+                  style: textTheme.titleLarge!.copyWith(
                     fontSize: 22,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -146,10 +140,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: Text(
                   "Create an account",
-                  style: GoogleFonts.montserrat().copyWith(
-                    color: const Color(0xFF333333),
-                    fontSize: 16,
-                  ),
+                  style: textTheme.bodyLarge,
                 ),
               ),
             ),
