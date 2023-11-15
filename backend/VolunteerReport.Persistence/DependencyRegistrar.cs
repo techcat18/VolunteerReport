@@ -49,6 +49,7 @@ public static class DependencyRegistrar
     private static void ConfigureRepositories(this IServiceCollection services)
     {
         services.AddScoped<IReportCategoryRepository, ReportCategoryRepository>();
+        services.AddScoped<IVolunteerRepository, VolunteerRepository>();
     }
     
     private static void ConfigureUnitOfWork(this IServiceCollection services)

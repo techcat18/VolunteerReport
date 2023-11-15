@@ -17,6 +17,7 @@ public static class DependencyRegistrar
     private static void ConfigureServices(this IServiceCollection services){
     {
         services.AddScoped<IReportCategoryService, ReportCategoryService>();
+        services.AddScoped<IVolunteerService, VolunteerService>();
     }}
     
     private static void ConfigureAutomapper(this IServiceCollection services)
