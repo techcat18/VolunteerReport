@@ -5,5 +5,7 @@ namespace VolunteerReport.Domain.Entities;
 public class User: IdentityUser<Guid>
 {
     public DateTime BirthDate { get; set; }
+    
+    public Guid? VolunteerId { get; set; }
     public Volunteer Volunteer { get; set; }
 }

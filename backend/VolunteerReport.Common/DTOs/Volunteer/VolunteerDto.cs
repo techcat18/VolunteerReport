@@ -9,6 +9,7 @@ public class VolunteerDto
     public string ShortInfo { get; set; }
     public string HelpDirection { get; set; }
     public string BankUrl { get; set; }
+    public Guid UserId { get; set; }
     public OrganizationDto Organization { get; set; }
     public ICollection<ReportDto> Reports { get; set; }
     public DateTime? CreatedAt { get; set; }
