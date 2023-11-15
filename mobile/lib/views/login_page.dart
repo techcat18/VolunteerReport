@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/widgets/input_field.dart';
+import 'package:mobile/widgets/submit_button.dart';
 
 class LoginPage extends StatelessWidget {
+  final Color forgotPasswordBtnColor = const Color(0xFF545454);
+
   const LoginPage({super.key});
 
   @override
@@ -26,58 +30,11 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 82,
             ),
-            TextField(
-              style: textTheme.labelMedium!.copyWith(
-                color: const Color(0xFF171717),
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 16,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: colorScheme.primaryContainer,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: colorScheme.primaryContainer,
-                  ),
-                ),
-                labelText: "Email/Phone number",
-                labelStyle: textTheme.labelMedium,
-                floatingLabelStyle: textTheme.labelMedium,
-              ),
-            ),
+            const InputField(label: "Email/Phone number"),
             const SizedBox(
               height: 15,
             ),
-            TextField(
-              style: textTheme.labelMedium!.copyWith(
-                fontSize: 16,
-                color: const Color(0xFF171717),
-              ),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 16,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: colorScheme.primaryContainer,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: colorScheme.primaryContainer,
-                  ),
-                ),
-                labelText: "Password",
-                labelStyle: textTheme.labelMedium,
-                floatingLabelStyle: textTheme.labelMedium,
-              ),
-            ),
+            const InputField(label: "Password"),
             const SizedBox(
               height: 2,
             ),
@@ -95,7 +52,7 @@ class LoginPage extends StatelessWidget {
                   child: Text(
                     "Forgot your password?",
                     style: textTheme.bodyMedium!.copyWith(
-                      color: const Color(0xFF545454),
+                      color: forgotPasswordBtnColor,
                     ),
                   ),
                 ),
@@ -107,26 +64,7 @@ class LoginPage extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 18),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide.none,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  backgroundColor: colorScheme.primaryContainer,
-                  padding: const EdgeInsets.all(17),
-                ),
-                child: Text(
-                  "Log in",
-                  style: textTheme.titleLarge!.copyWith(
-                    fontSize: 22,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              child: const SubmitButton(),
             ),
             const SizedBox(
               height: 8,
