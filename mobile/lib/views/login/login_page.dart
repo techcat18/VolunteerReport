@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/views/login/create_account_button.dart';
 import 'package:mobile/views/login/forgot_password_button.dart';
+import 'package:mobile/views/reports/reports_page.dart';
 import 'package:mobile/widgets/input_field.dart';
 import 'package:mobile/widgets/submit_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
+
+  void logIn(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const ReportsPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
