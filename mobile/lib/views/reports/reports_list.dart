@@ -13,6 +13,11 @@ final dummyData = [
     "///////////////////////////////////////////////////////////////////////////////////////////////////",
     "assets/placeholder.png",
   ),
+  Report(
+    "Name of the report",
+    "///////////////////////////////////////////////////////////////////////////////////////////////////",
+    "assets/placeholder.png",
+  ),
 ];
 
 class ReportsList extends StatelessWidget {
@@ -20,7 +25,7 @@ class ReportsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return SliverList.builder(
       itemCount: dummyData.length,
       itemBuilder: (context, index) {
         final report = dummyData[index];

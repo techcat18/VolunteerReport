@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/views/reports/add_report_button.dart';
 import 'package:mobile/views/reports/reports_list.dart';
 
@@ -26,30 +25,25 @@ class ReportsPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: const AddReportButton(),
-      body: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 17,
-          ),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 32),
+              child: Text(
                 "Reports",
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
-              const SizedBox(
-                height: 32,
-              ),
-              const Expanded(
-                child: ReportsList(),
-              ),
-            ],
+            ),
           ),
-        ),
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 17,
+            ),
+            sliver: ReportsList(),
+          ),
+        ],
       ),
     );
   }
