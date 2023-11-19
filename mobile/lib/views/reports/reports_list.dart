@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile/models/report.dart';
 import 'package:mobile/views/reports/report_list_item.dart';
 
-final dummyData = [
+final _dummyData = [
   Report(
     "Name of the report",
     "///////////////////////////////////////////////////////////////////////////////////////////////////",
@@ -26,9 +26,9 @@ class ReportsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList.builder(
-      itemCount: dummyData.length,
+      itemCount: _dummyData.length,
       itemBuilder: (context, index) {
-        final report = dummyData[index];
+        final report = _dummyData[index];
         return ReportsListItem(report: report);
       },
     );

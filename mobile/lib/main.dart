@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:mobile/views/login/login_page.dart';
 
-final kColorScheme = ColorScheme.fromSwatch().copyWith(
+final _kColorScheme = ColorScheme.fromSwatch().copyWith(
   primary: const Color(0xFF333333),
   secondary: const Color(0xFF4CAF50),
   tertiary: const Color(0xFF878787),
@@ -12,40 +12,40 @@ final kColorScheme = ColorScheme.fromSwatch().copyWith(
   secondaryContainer: const Color(0xFFC8F6CA),
 );
 
-final theme = ThemeData(
+final _theme = ThemeData(
   useMaterial3: true,
-  colorScheme: kColorScheme,
+  colorScheme: _kColorScheme,
   scaffoldBackgroundColor: Colors.white,
   textTheme: TextTheme(
     headlineLarge: GoogleFonts.montserrat(
       fontSize: 26,
       fontWeight: FontWeight.w600,
-      color: kColorScheme.primary,
+      color: _kColorScheme.primary,
     ),
     titleLarge: GoogleFonts.montserrat(
       fontSize: 20,
       fontWeight: FontWeight.w600,
-      color: kColorScheme.primary,
+      color: _kColorScheme.primary,
     ),
     titleMedium: GoogleFonts.montserrat(
       fontSize: 18,
       fontWeight: FontWeight.bold,
-      color: kColorScheme.secondary,
+      color: _kColorScheme.secondary,
     ),
     labelLarge: GoogleFonts.montserrat(
       fontSize: 18,
-      color: kColorScheme.primary,
+      color: _kColorScheme.primary,
     ),
     labelMedium: GoogleFonts.montserrat(
       fontSize: 16,
       color: const Color(0xFF323941),
     ),
     bodyLarge: GoogleFonts.montserrat(
-      color: kColorScheme.primary,
+      color: _kColorScheme.primary,
     ),
     bodyMedium: GoogleFonts.montserrat(
       fontSize: 15,
-      color: kColorScheme.primary,
+      color: _kColorScheme.primary,
     ),
   ),
 );
@@ -60,7 +60,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
+      theme: _theme,
       home: const LoginPage(),
     );
   }

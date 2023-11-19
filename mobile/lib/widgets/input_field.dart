@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
-  final inputColor = const Color(0xFF171717);
+  final _inputColor = const Color(0xFF171717);
 
   const InputField({super.key, required this.label});
 
@@ -15,7 +15,7 @@ class InputField extends StatelessWidget {
 
     return TextField(
       style: textTheme.labelMedium!.copyWith(
-        color: inputColor,
+        color: _inputColor,
       ),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(

@@ -47,12 +47,9 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 88,
             ),
-            SizedBox(
-              width: 290,
-              child: SubmitButton(
-                text: "Log in",
-                onSubmit: () => logIn(context),
-              ),
+            SubmitButton(
+              text: "Log in",
+              onSubmit: () => logIn(context),
             ),
             const SizedBox(
               height: 8,
