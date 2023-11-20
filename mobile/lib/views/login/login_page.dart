@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/views/login/create_account_button.dart';
 import 'package:mobile/views/login/forgot_password_button.dart';
-import 'package:mobile/widgets/input_field.dart';
 import 'package:mobile/widgets/submit_button.dart';
 
 class LoginPage extends StatelessWidget {
@@ -9,6 +8,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -26,11 +27,21 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 82,
             ),
-            const InputField(label: "Email/Phone number"),
+            TextField(
+              style: textTheme.labelMedium,
+              decoration: const InputDecoration(
+                labelText: "Email/Phone number",
+              ),
+            ),
             const SizedBox(
               height: 15,
             ),
-            const InputField(label: "Password"),
+            TextField(
+              style: textTheme.labelMedium,
+              decoration: const InputDecoration(
+                labelText: "Password",
+              ),
+            ),
             const SizedBox(
               height: 2,
             ),
@@ -38,12 +49,9 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 88,
             ),
-            SizedBox(
-              width: 290,
-              child: SubmitButton(
-                text: "Log in",
-                onSubmit: () => {},
-              ),
+            SubmitButton(
+              text: "Log in",
+              onSubmit: () => {},
             ),
             const SizedBox(
               height: 8,

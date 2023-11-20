@@ -1,53 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile/themes/app_color_scheme.dart';
+import 'package:mobile/themes/app_input_theme.dart';
+import 'package:mobile/themes/app_text_theme.dart';
 
 import 'package:mobile/views/login/login_page.dart';
 
-final kColorScheme = ColorScheme.fromSwatch().copyWith(
-  primary: const Color(0xFF333333),
-  secondary: const Color(0xFF4CAF50),
-  tertiary: const Color(0xFF878787),
-  error: const Color(0xFFFF3D3D),
-  primaryContainer: const Color(0xFF4CAF50),
-  secondaryContainer: const Color(0xFFC8F6CA),
-);
-
 final theme = ThemeData(
   useMaterial3: true,
-  colorScheme: kColorScheme,
+  colorScheme: appColorScheme,
   scaffoldBackgroundColor: Colors.white,
-  textTheme: TextTheme(
-    headlineLarge: GoogleFonts.montserrat(
-      fontSize: 26,
-      fontWeight: FontWeight.w600,
-      color: kColorScheme.primary,
-    ),
-    titleLarge: GoogleFonts.montserrat(
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-      color: kColorScheme.primary,
-    ),
-    titleMedium: GoogleFonts.montserrat(
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-      color: kColorScheme.secondary,
-    ),
-    labelLarge: GoogleFonts.montserrat(
-      fontSize: 18,
-      color: kColorScheme.primary,
-    ),
-    labelMedium: GoogleFonts.montserrat(
-      fontSize: 16,
-      color: const Color(0xFF323941),
-    ),
-    bodyLarge: GoogleFonts.montserrat(
-      color: kColorScheme.primary,
-    ),
-    bodyMedium: GoogleFonts.montserrat(
-      fontSize: 15,
-      color: kColorScheme.primary,
-    ),
-  ),
+  inputDecorationTheme: AppInputTheme().theme(),
+  textTheme: appTextTheme,
 );
 
 void main() {
