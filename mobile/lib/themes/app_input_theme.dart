@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/themes/app_color_scheme.dart';
 import 'package:mobile/themes/app_text_theme.dart';
 
@@ -30,6 +31,12 @@ class AppInputTheme {
       border: _buildBorder(appColorScheme.primaryContainer),
       enabledBorder: _buildBorder(appColorScheme.primaryContainer),
       focusedBorder: _buildBorder(appColorScheme.primaryContainer),
+      errorBorder: _buildBorder(appColorScheme.error),
+      focusedErrorBorder: _buildBorder(appColorScheme.error),
+      errorStyle: GoogleFonts.montserrat(
+        fontSize: 12,
+        color: appColorScheme.error,
+      ),
       labelStyle: _buildTextStyle(labelColor),
       floatingLabelStyle: _buildTextStyle(labelColor),
     );
