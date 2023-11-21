@@ -19,13 +19,6 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (value) {
-        if (value == null || value.trim().isEmpty) {
-          return "This is a required field!";
-        }
-
-        return null;
-      },
       obscureText: obscurePassword,
       keyboardType: TextInputType.visiblePassword,
       style: Theme.of(context).textTheme.labelMedium,
@@ -41,6 +34,13 @@ class _PasswordFieldState extends State<PasswordField> {
           ),
         ),
       ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return "This is a required field!";
+        }
+
+        return null;
+      },
     );
   }
 }

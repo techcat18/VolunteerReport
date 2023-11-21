@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/widgets/inputs/email_phone_field.dart';
-import 'package:mobile/widgets/inputs/password_field.dart';
+import 'package:mobile/views/sign_up/sign_up_form.dart';
 import 'package:mobile/widgets/submit_button.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
-
-  List<Widget> _addSpacing(List<Widget> widgets) {
-    return [
-      for (Widget widget in widgets) ...[
-        widget,
-        const SizedBox(
-          height: 15,
-        ),
-      ]
-    ];
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +26,7 @@ class SignUpPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ..._addSpacing([
-              const EmailPhoneField(),
-              const PasswordField(),
-            ]),
+            SignUpForm(),
             const Spacer(),
             SubmitButton(
               onSubmit: () {},
