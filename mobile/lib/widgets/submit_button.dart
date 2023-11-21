@@ -31,6 +31,7 @@ class SubmitButton extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.montserrat(
+            height: 1,
             fontSize: 22,
             color: Colors.white,
             fontWeight: FontWeight.w600,
