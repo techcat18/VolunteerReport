@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
-class PasswordField extends StatefulWidget {
-  const PasswordField({super.key});
+class ReactivePassword extends StatefulWidget {
+  const ReactivePassword({super.key, required this.name});
+
+  final String name;
 
   @override
-  State<PasswordField> createState() => _PasswordFieldState();
+  State<ReactivePassword> createState() => _ReactivePasswordState();
 }
 
-class _PasswordFieldState extends State<PasswordField> {
+class _ReactivePasswordState extends State<ReactivePassword> {
   bool obscurePassword = true;
 
   void hideShowPassword() {
@@ -18,17 +21,14 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: (value) {
-        if (value == null || value.trim().isEmpty) {
-          return "This is a required field!";
-        }
-
-        return null;
-      },
+    return ReactiveTextField(
+      formControlName: widget.name,
       obscureText: obscurePassword,
       keyboardType: TextInputType.visiblePassword,
       style: Theme.of(context).textTheme.labelMedium,
+      validationMessages: {
+        ValidationMessage.required: (error) => "This is a required field!",
+      },
       decoration: InputDecoration(
         labelText: "Password",
         suffixIcon: IconButton(
