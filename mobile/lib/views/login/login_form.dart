@@ -10,7 +10,7 @@ class LoginForm extends StatelessWidget {
   LoginForm({super.key});
 
   final form = fb.group({
-    'email': [
+    "email": [
       Validators.required,
       Validators.composeOR(
         [
@@ -19,7 +19,7 @@ class LoginForm extends StatelessWidget {
         ],
       )
     ],
-    'password': [Validators.required],
+    "password": [Validators.required],
   });
 
   @override

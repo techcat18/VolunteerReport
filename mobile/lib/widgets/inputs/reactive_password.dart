@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ReactivePassword extends StatefulWidget {
-  const ReactivePassword({super.key, required this.name});
+  const ReactivePassword({
+    super.key,
+    this.label = "Password",
+    required this.name,
+  });
 
+  final String label;
   final String name;
 
   @override
@@ -30,7 +35,7 @@ class _ReactivePasswordState extends State<ReactivePassword> {
         ValidationMessage.required: (error) => "This is a required field!",
       },
       decoration: InputDecoration(
-        labelText: "Password",
+        labelText: widget.label,
         suffixIcon: IconButton(
           onPressed: hideShowPassword,
           icon: Icon(

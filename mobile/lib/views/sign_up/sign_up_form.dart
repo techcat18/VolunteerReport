@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
+import 'package:mobile/helpers/phone_validator.dart';
+
 import 'package:mobile/widgets/inputs/dropdown_field.dart';
-import 'package:mobile/widgets/inputs/multiline_field.dart';
 import 'package:mobile/widgets/inputs/reactive_email_phone.dart';
 import 'package:mobile/widgets/inputs/reactive_password.dart';
-import 'package:mobile/widgets/inputs/plain_text_field.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:mobile/widgets/inputs/reactive_plain_text.dart';
 
 class SignUpForm extends StatelessWidget {
   SignUpForm({super.key});
@@ -21,9 +23,19 @@ class SignUpForm extends StatelessWidget {
   }
 
   final form = fb.group({
-    "email": "",
-    "password": "",
-    "confirmPassword": "",
+    "name": [Validators.required],
+    "about": [Validators.required],
+    "email": [
+      Validators.required,
+      Validators.composeOR(
+        [
+          Validators.email,
+          const PhoneValidator(),
+        ],
+      )
+    ],
+    "password": [Validators.required],
+    "confirmPassword": [Validators.required],
   });
 
   @override
@@ -34,14 +46,13 @@ class SignUpForm extends StatelessWidget {
         return Column(
           children: _addSpacing(
             [
-              const PlainTextField(
+              const ReactivePlainText(
+                name: "name",
                 label: "Volunteer’s name",
-                min: 2,
-                max: 120,
               ),
-              const MultilineField(
+              const ReactivePlainText(
+                name: "about",
                 label: "About",
-                max: 300,
               ),
               const ReactiveEmailPhone(name: "email"),
               const DropDownField<String>(
