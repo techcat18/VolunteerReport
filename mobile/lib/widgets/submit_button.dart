@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
@@ -14,6 +13,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = theme.textTheme;
     final ColorScheme colorScheme = theme.colorScheme;
 
     return SizedBox(
@@ -30,11 +30,9 @@ class SubmitButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: GoogleFonts.montserrat(
-            height: 1,
+          style: textTheme.titleLarge!.copyWith(
             fontSize: 22,
             color: Colors.white,
-            fontWeight: FontWeight.w600,
           ),
         ),
       ),

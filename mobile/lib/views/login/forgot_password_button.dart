@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
-  final Color forgotPasswordBtnColor = const Color(0xFF545454);
+  final Color _forgotPasswordBtnColor = const Color(0xFF545454);
 
   const ForgotPasswordButton({super.key});
 
@@ -21,7 +21,7 @@ class ForgotPasswordButton extends StatelessWidget {
           child: Text(
             "Forgot your password?",
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: forgotPasswordBtnColor,
+                  color: _forgotPasswordBtnColor,
                 ),
           ),
         ),
