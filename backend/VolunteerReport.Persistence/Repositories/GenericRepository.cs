@@ -4,8 +4,7 @@ using VolunteerReport.Domain.Entities;
 
 namespace VolunteerReport.Persistence.Repositories;
 
-public class GenericRepository<T>: IGenericRepository<T> 
-    where T : BaseEntity
+public class GenericRepository<T>: IGenericRepository<T> where T : class, IBaseEntity
 {
     private readonly AppDbContext _context;
     protected readonly DbSet<T> DbSet;

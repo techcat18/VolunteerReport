@@ -1,6 +1,6 @@
 ﻿namespace VolunteerReport.Domain.Entities;
 
-public abstract class BaseEntity
+public interface IBaseEntity
 {
     public Guid Id { get; set; }
     public DateTime? CreatedAt { get; set; }

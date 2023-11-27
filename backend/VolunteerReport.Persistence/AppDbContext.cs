@@ -39,7 +39,7 @@ public class AppDbContext: IdentityDbContext<User, Role, Guid>
 
         foreach (var entityEntry in entries)
         {
-            var auditEntity = (BaseEntity)entityEntry.Entity;
+            var auditEntity = (IBaseEntity)entityEntry.Entity;
             auditEntity.ModifiedAt = DateTime.UtcNow;
 
             if (entityEntry.State == EntityState.Added)
@@ -57,7 +57,7 @@ public class AppDbContext: IdentityDbContext<User, Role, Guid>
 
         foreach (var entityEntry in entries)
         {
-            var auditEntity = (BaseEntity)entityEntry.Entity;
+            var auditEntity = (IBaseEntity)entityEntry.Entity;
             auditEntity.IsDeleted = true;
             entityEntry.State = EntityState.Modified;
         }

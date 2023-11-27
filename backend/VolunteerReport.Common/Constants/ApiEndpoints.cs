@@ -25,5 +25,12 @@ public partial class Constants
             public const string Update = $"{Base}/{IdPlaceholder}";
             public const string Delete = $"{Base}/{IdPlaceholder}";
         }
+
+        public static class Auth
+        {
+            public const string Base = "/api/v1/auth";
+            public const string Login = $"{Base}/login";
+            public const string Signup = $"{Base}/signup";
+        }
     }
 }

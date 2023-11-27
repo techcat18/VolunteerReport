@@ -2,7 +2,7 @@
 
 namespace VolunteerReport.Application.Abstractions.Persistence;
 
-public interface IGenericRepository<T>: IRepository where T: BaseEntity
+public interface IGenericRepository<T>: IRepository where T: IBaseEntity
 {
     IQueryable<T> AsQueryable();
     Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
