@@ -5,7 +5,7 @@ import 'package:mobile/themes/app_text_theme.dart';
 
 import 'package:mobile/views/login/login_page.dart';
 
-final theme = ThemeData(
+final _theme = ThemeData(
   useMaterial3: true,
   colorScheme: appColorScheme,
   scaffoldBackgroundColor: Colors.white,
@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
+      theme: _theme,
       home: const LoginPage(),
     );
   }

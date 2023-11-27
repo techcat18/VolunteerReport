@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/helpers/phone_validator.dart';
 import 'package:mobile/views/login/forgot_password_button.dart';
+import 'package:mobile/views/reports/reports_page.dart';
 import 'package:mobile/widgets/inputs/reactive_email_phone.dart';
 import 'package:mobile/widgets/inputs/password_field.dart';
 import 'package:mobile/widgets/submit_button.dart';
@@ -9,7 +10,15 @@ import 'package:reactive_forms/reactive_forms.dart';
 class LoginForm extends StatelessWidget {
   LoginForm({super.key});
 
-  final form = fb.group({
+  void _logIn(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const ReportsPage(),
+      ),
+    );
+  }
+
+  final _form = fb.group({
     'email': [
       Validators.required,
       Validators.composeOR(
@@ -25,7 +34,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormBuilder(
-      form: () => form,
+      form: () => _form,
       builder: (context, form, child) {
         return Column(
           children: [
@@ -44,9 +53,7 @@ class LoginForm extends StatelessWidget {
             ),
             SubmitButton(
               text: "Log in",
-              onSubmit: () {
-                print(form.controls.values);
-              },
+              onSubmit: () => _logIn(context),
             ),
           ],
         );
