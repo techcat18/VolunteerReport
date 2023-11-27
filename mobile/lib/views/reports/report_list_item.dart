@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/models/report.dart';
+import 'package:mobile/views/reports/report_list_item_categories.dart';
+import 'package:mobile/views/reports/report_list_item_total.dart';
 
 class ReportsListItem extends StatelessWidget {
   const ReportsListItem({
@@ -30,32 +32,33 @@ class ReportsListItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            Container(
               height: 180,
+              margin: const EdgeInsets.only(
+                bottom: 12,
+              ),
               width: double.infinity,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.asset(
-                  report.img,
+                  "assets/placeholder.png",
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              report.name,
-              style: textTheme.titleMedium,
-            ),
-            const SizedBox(height: 11),
-            SizedBox(
-              width: 280,
+            Container(
+              margin: const EdgeInsets.only(
+                right: 20,
+              ),
               child: Text(
-                "Description:\n${report.description}",
-                overflow: TextOverflow.ellipsis,
                 maxLines: 3,
+                report.description,
                 style: textTheme.bodyLarge,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
+            ReportListItemCategories.fromReport(report),
+            ReportListItemTotal.fromReport(report),
           ],
         ),
       ),

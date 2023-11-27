@@ -1,15 +1,13 @@
-class Report {
-  Report(
-    this.name,
-    this.description,
-    this.img,
-    this.createdAt,
-    this.modifiedAt,
-  );
+import 'package:mobile/models/report_detail.dart';
 
-  String img;
-  String name;
+class Report {
+  Report({
+    required this.id,
+    required this.description,
+    required this.reportDetails,
+  });
+
+  String id;
   String description;
-  DateTime createdAt;
-  DateTime modifiedAt;
+  List<ReportDetail> reportDetails;
 }
