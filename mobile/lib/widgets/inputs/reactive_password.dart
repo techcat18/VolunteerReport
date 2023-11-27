@@ -33,6 +33,9 @@ class _ReactivePasswordState extends State<ReactivePassword> {
       style: Theme.of(context).textTheme.labelMedium,
       validationMessages: {
         ValidationMessage.required: (error) => "This is a required field!",
+        ValidationMessage.minLength: (error) =>
+            "Must be less than ${(error as Map)['requiredLength']} characters long!!",
+        ValidationMessage.mustMatch: (error) => "Password mismatch!",
       },
       decoration: InputDecoration(
         labelText: widget.label,

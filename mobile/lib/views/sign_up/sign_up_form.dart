@@ -40,9 +40,14 @@ class _SignUpFormState extends State<SignUpForm> {
       )
     ],
     "organization": [Validators.required],
-    "password": [Validators.required],
+    "password": [
+      Validators.required,
+      Validators.minLength(8),
+    ],
     "confirmPassword": [Validators.required],
-  });
+  }, [
+    Validators.mustMatch("password", "confirmPassword"),
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,20 @@ class _SignUpFormState extends State<SignUpForm> {
               ],
             ),
             const ReactivePassword(name: "password"),
-            const ReactivePassword(name: "confirmPassword"),
+            ReactiveFormConsumer(
+              builder: (context, formGroup, child) {
+                var passwordControl = formGroup.control("password");
+
+                if (!passwordControl.touched || !passwordControl.valid) {
+                  return const SizedBox();
+                }
+
+                return const ReactivePassword(
+                  name: "confirmPassword",
+                  label: "Repeat your password",
+                );
+              },
+            ),
           ],
         ),
       ),

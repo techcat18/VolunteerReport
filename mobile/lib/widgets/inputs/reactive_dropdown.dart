@@ -110,6 +110,9 @@ class _ReactiveDropdownState extends State<ReactiveDropdown> {
         labelText: widget.label,
       ),
       style: Theme.of(context).textTheme.labelMedium,
+      validationMessages: {
+        ValidationMessage.required: (error) => "This is a required field!",
+      },
     );
   }
 
