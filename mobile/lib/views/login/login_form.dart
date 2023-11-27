@@ -3,7 +3,7 @@ import 'package:mobile/helpers/phone_validator.dart';
 import 'package:mobile/views/login/forgot_password_button.dart';
 import 'package:mobile/views/reports/reports_page.dart';
 import 'package:mobile/widgets/inputs/reactive_email_phone.dart';
-import 'package:mobile/widgets/inputs/password_field.dart';
+import 'package:mobile/widgets/inputs/reactive_password.dart';
 import 'package:mobile/widgets/submit_button.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -28,7 +28,7 @@ class LoginForm extends StatelessWidget {
         ],
       )
     ],
-    'password': [Validators.required],
+    "password": [Validators.required],
   });
 
   @override
