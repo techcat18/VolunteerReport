@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/views/login/create_account_button.dart';
-import 'package:mobile/views/login/forgot_password_button.dart';
-import 'package:mobile/views/reports/reports_page.dart';
-import 'package:mobile/widgets/input_field.dart';
-import 'package:mobile/widgets/submit_button.dart';
+import 'package:mobile/views/login/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  void logIn(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const ReportsPage(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -28,31 +19,13 @@ class LoginPage extends StatelessWidget {
           children: [
             Text(
               "Welcome!",
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
+              style: theme.textTheme.headlineLarge!.copyWith(
+                color: theme.colorScheme.secondary,
+              ),
             ),
-            const SizedBox(
-              height: 82,
-            ),
-            const InputField(label: "Email/Phone number"),
-            const SizedBox(
-              height: 15,
-            ),
-            const InputField(label: "Password"),
-            const SizedBox(
-              height: 2,
-            ),
-            const ForgotPasswordButton(),
-            const SizedBox(
-              height: 88,
-            ),
-            SubmitButton(
-              text: "Log in",
-              onSubmit: () => logIn(context),
-            ),
-            const SizedBox(
-              height: 8,
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 82, 0, 8),
+              child: LoginForm(),
             ),
             const CreateAccountButton(),
           ],
