@@ -35,7 +35,7 @@ class SignUpPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(32, 80, 32, keyboardSpace),
-          child: SignUpForm(),
+          child: const SignUpForm(),
         ),
       ),
     );
