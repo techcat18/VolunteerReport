@@ -23,6 +23,7 @@ class ReactiveDropdown extends StatefulWidget {
 
 class _ReactiveDropdownState extends State<ReactiveDropdown> {
   Size? _offsetSize;
+  bool _isFocused = false;
   final _focusNode = FocusNode();
   final _layerLink = LayerLink();
   final OverlayPortalController _dropdownController = OverlayPortalController();
@@ -38,6 +39,9 @@ class _ReactiveDropdownState extends State<ReactiveDropdown> {
       } else {
         _dropdownController.hide();
       }
+      setState(() {
+        _isFocused = _focusNode.hasFocus;
+      });
     });
   }
 
@@ -108,6 +112,11 @@ class _ReactiveDropdownState extends State<ReactiveDropdown> {
       formControlName: widget.name,
       decoration: InputDecoration(
         labelText: widget.label,
+        suffixIcon: AnimatedRotation(
+          turns: _isFocused ? 1 / 2 : 0,
+          duration: const Duration(milliseconds: 200),
+          child: const Icon(Icons.keyboard_arrow_down),
+        ),
       ),
       style: Theme.of(context).textTheme.labelMedium,
       validationMessages: {

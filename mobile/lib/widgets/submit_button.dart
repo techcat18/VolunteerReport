@@ -8,7 +8,7 @@ class SubmitButton extends StatelessWidget {
   });
 
   final String text;
-  final Function() onSubmit;
+  final void Function() onSubmit;
 
   @override
   Widget build(BuildContext context) {

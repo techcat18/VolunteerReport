@@ -27,7 +27,7 @@ class _SignUpFormState extends State<SignUpForm> {
     ];
   }
 
-  final form = fb.group({
+  final _form = fb.group({
     "name": [Validators.required],
     "about": [Validators.required],
     "email": [
@@ -52,7 +52,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     return ReactiveForm(
-      formGroup: form,
+      formGroup: _form,
       child: Column(
         children: _addSpacing(
           [
