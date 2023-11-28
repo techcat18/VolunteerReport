@@ -7,4 +7,5 @@ final ColorScheme appColorScheme = ColorScheme.fromSwatch().copyWith(
   error: const Color(0xFFE71010),
   primaryContainer: const Color(0xFF4CAF50),
   secondaryContainer: const Color(0xFFC8F6CA),
+  tertiaryContainer: const Color(0xFFE4FBE5),
 );
