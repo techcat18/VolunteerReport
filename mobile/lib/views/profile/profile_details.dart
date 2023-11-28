@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AccountDetails extends StatelessWidget {
-  const AccountDetails({super.key});
+class ProfileDetails extends StatelessWidget {
+  const ProfileDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
