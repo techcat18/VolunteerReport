@@ -25,7 +25,7 @@ class ReactivePlainText extends StatelessWidget {
       validationMessages: {
         ValidationMessage.required: (error) => "This is a required field!",
         ValidationMessage.minLength: (error) =>
-            "Must be more than ${(error as Map)['requiredLength']} characters long!!",
+            "Must be less than ${(error as Map)['requiredLength']} characters long!!",
         ValidationMessage.maxLength: (error) =>
             "Must be more than ${(error as Map)['requiredLength']} characters long!!",
       },

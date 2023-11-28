@@ -4,12 +4,14 @@ import 'package:reactive_forms/reactive_forms.dart';
 class ReactivePassword extends StatefulWidget {
   const ReactivePassword({
     super.key,
+    this.showErrors,
     this.label = "Password",
     required this.name,
   });
 
   final String label;
   final String name;
+  final bool Function(FormControl<Object?>)? showErrors;
 
   @override
   State<ReactivePassword> createState() => _ReactivePasswordState();
@@ -34,9 +36,10 @@ class _ReactivePasswordState extends State<ReactivePassword> {
       validationMessages: {
         ValidationMessage.required: (error) => "This is a required field!",
         ValidationMessage.minLength: (error) =>
-            "Must be less than ${(error as Map)['requiredLength']} characters long!!",
+            "Must be more than ${(error as Map)['requiredLength']} characters long!!",
         ValidationMessage.mustMatch: (error) => "Password mismatch!",
       },
+      showErrors: widget.showErrors,
       decoration: InputDecoration(
         labelText: widget.label,
         suffixIcon: IconButton(

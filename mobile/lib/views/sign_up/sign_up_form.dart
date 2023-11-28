@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/widgets/submit_button.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'package:mobile/helpers/phone_validator.dart';
@@ -27,27 +28,34 @@ class _SignUpFormState extends State<SignUpForm> {
     ];
   }
 
-  final _form = fb.group({
-    "name": [Validators.required],
-    "about": [Validators.required],
-    "email": [
-      Validators.required,
-      Validators.composeOR(
-        [
-          Validators.email,
-          const PhoneValidator(),
-        ],
-      )
+  final _form = fb.group(
+    {
+      "name": [Validators.required],
+      "about": [Validators.required],
+      "email": [
+        Validators.required,
+        Validators.composeOR(
+          [
+            Validators.email,
+            const PhoneValidator(),
+          ],
+        )
+      ],
+      "organization": [Validators.required],
+      "password": [
+        Validators.required,
+        Validators.minLength(8),
+      ],
+      "confirmPassword": [Validators.required],
+    },
+    [
+      Validators.mustMatch(
+        "password",
+        "confirmPassword",
+        markAsDirty: false,
+      ),
     ],
-    "organization": [Validators.required],
-    "password": [
-      Validators.required,
-      Validators.minLength(8),
-    ],
-    "confirmPassword": [Validators.required],
-  }, [
-    Validators.mustMatch("password", "confirmPassword"),
-  ]);
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -81,15 +89,21 @@ class _SignUpFormState extends State<SignUpForm> {
               builder: (context, formGroup, child) {
                 var passwordControl = formGroup.control("password");
 
-                if (!passwordControl.touched || !passwordControl.valid) {
+                if (!passwordControl.valid) {
                   return const SizedBox();
                 }
 
-                return const ReactivePassword(
+                return ReactivePassword(
                   name: "confirmPassword",
                   label: "Repeat your password",
+                  showErrors: (control) => control.invalid && control.dirty,
                 );
               },
+            ),
+            const Spacer(),
+            SubmitButton(
+              onSubmit: () {},
+              text: "Create",
             ),
           ],
         ),
