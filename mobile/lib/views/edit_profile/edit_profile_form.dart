@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/helpers/phone_validator.dart';
+import 'package:mobile/helpers/url_validator.dart';
 import 'package:mobile/widgets/inputs/reactive_dropdown.dart';
 import 'package:mobile/widgets/inputs/reactive_email_phone.dart';
 import 'package:mobile/widgets/inputs/reactive_plain_text.dart';
+import 'package:mobile/widgets/inputs/reactive_url_field.dart';
 import 'package:mobile/widgets/submit_button.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -23,6 +25,7 @@ class EditProfileForm extends StatelessWidget {
         )
       ],
       "about": [Validators.required],
+      "link": ["", const UrlValidator()]
     },
   );
 
@@ -90,7 +93,10 @@ class EditProfileForm extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            //TODO: Donation link
+            const ReactiveUrlField(
+              name: "link",
+              label: "Donation link",
+            ),
             const Spacer(),
             const SizedBox(
               height: 30,
