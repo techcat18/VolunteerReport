@@ -16,6 +16,7 @@ class ReactivePlainText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveTextField(
+      maxLines: maxLines,
       formControlName: name,
       keyboardType: TextInputType.text,
       style: Theme.of(context).textTheme.labelMedium,

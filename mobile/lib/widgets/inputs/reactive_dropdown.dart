@@ -106,8 +106,15 @@ class _ReactiveDropdownState extends State<ReactiveDropdown> {
     );
   }
 
+  void _onTap(FormControl<Object?> control) {
+    if (control.hasFocus) {
+      control.unfocus();
+    }
+  }
+
   Widget _buildReactiveTextField() {
     return ReactiveTextField(
+      onTap: _onTap,
       focusNode: _focusNode,
       formControlName: widget.name,
       decoration: InputDecoration(

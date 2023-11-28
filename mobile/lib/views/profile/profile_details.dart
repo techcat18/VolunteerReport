@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/views/profile/edit_profile_button.dart';
 
 class ProfileDetails extends StatelessWidget {
   const ProfileDetails({super.key});
@@ -52,39 +53,7 @@ class ProfileDetails extends StatelessWidget {
           style: theme.textTheme.labelLarge,
         ),
         const Spacer(),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(50),
-            side: BorderSide(
-              width: 1,
-              color: theme.colorScheme.primaryContainer,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            backgroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(
-              vertical: 14,
-              horizontal: 10,
-            ),
-          ),
-          child: Row(
-            children: [
-              Text(
-                "Edit profile",
-                style: theme.textTheme.bodyLarge!.copyWith(
-                  fontSize: 20,
-                ),
-              ),
-              const Spacer(),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: theme.colorScheme.primary,
-              ),
-            ],
-          ),
-        )
+        const EditProfileButton(),
       ],
     );
   }

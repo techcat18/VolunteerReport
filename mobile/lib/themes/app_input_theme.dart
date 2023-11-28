@@ -28,6 +28,8 @@ class AppInputTheme {
         vertical: 20,
         horizontal: 16,
       ),
+      filled: true,
+      fillColor: Colors.white,
       border: _buildBorder(appColorScheme.primaryContainer),
       enabledBorder: _buildBorder(appColorScheme.primaryContainer),
       focusedBorder: _buildBorder(appColorScheme.primaryContainer),
