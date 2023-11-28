@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile/helpers/text_style_extensions.dart';
 import 'package:mobile/models/report.dart';
 
 final _formatCurrency = NumberFormat.currency(
@@ -28,23 +30,28 @@ class ReportListItemTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
+    var theme = Theme.of(context);
+    var textTheme = theme.textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Total value",
-          style: textTheme.titleLarge,
+          style: textTheme.bodyLarge!.copyWithWeight(
+            FontWeight.w600,
+          ),
         ),
         Container(
           margin: const EdgeInsets.only(
-            top: 5,
-            left: 5,
+            top: 6,
           ),
           child: Text(
             _formatCurrency.format(_totalAmount),
-            style: textTheme.titleMedium,
+            style: textTheme.bodyLarge!.copyWithWeight(
+              FontWeight.w600,
+              color: theme.colorScheme.secondary,
+            ),
           ),
         )
       ],

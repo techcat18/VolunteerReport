@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile/helpers/text_style_extensions.dart';
 import 'package:mobile/models/report.dart';
 
 class ReportListItemCategories extends StatelessWidget {
@@ -24,13 +26,24 @@ class ReportListItemCategories extends StatelessWidget {
 
     return _categories.map(
       (category) {
-        return Chip(
-          label: Text(category),
-          backgroundColor: theme.colorScheme.primaryContainer,
-          labelStyle: theme.textTheme.bodyLarge!.copyWith(
-            color: Colors.white,
+        return Container(
+          decoration: BoxDecoration(
+            color: theme.colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(5),
           ),
-          padding: const EdgeInsets.all(0),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 2,
+              horizontal: 9,
+            ),
+            child: Text(
+              category,
+              style: theme.textTheme.bodyLarge!.copyWithWeight(
+                FontWeight.w500,
+                color: Colors.white,
+              ),
+            ),
+          ),
         );
       },
     ).toList();
@@ -40,7 +53,7 @@ class ReportListItemCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
-        vertical: 6,
+        vertical: 15,
       ),
       child: Wrap(
         spacing: 8.0,

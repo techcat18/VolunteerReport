@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/helpers/text_style_extensions.dart';
 import 'package:mobile/models/report.dart';
 import 'package:mobile/views/reports/report_list_item_categories.dart';
 import 'package:mobile/views/reports/report_list_item_total.dart';
@@ -44,6 +45,12 @@ class ReportsListItem extends StatelessWidget {
                   "assets/placeholder.png",
                   fit: BoxFit.cover,
                 ),
+              ),
+            ),
+            Text(
+              "Description:",
+              style: textTheme.bodyLarge!.copyWithWeight(
+                FontWeight.w500,
               ),
             ),
             Container(
