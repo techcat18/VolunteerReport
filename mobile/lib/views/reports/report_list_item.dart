@@ -34,11 +34,13 @@ class ReportsListItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ImageContainer(
-              height: 180,
-              marginBottom: 12,
-              borderRadius: 15,
-              imageSrc: "assets/placeholder.png",
+            ImageContainer(
+              decoration: ImageContainerDecoration(
+                height: 180,
+                marginBottom: 12,
+                borderRadius: 15,
+              ),
+              image: Image.asset("assets/placeholder.png"),
             ),
             Text(
               "Description:",

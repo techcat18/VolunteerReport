@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class ImageContainer extends StatelessWidget {
-  const ImageContainer({
-    super.key,
+class ImageContainerDecoration {
+  ImageContainerDecoration({
     this.width = double.infinity,
     this.height = double.infinity,
     this.marginBottom = 0,
@@ -11,10 +9,7 @@ class ImageContainer extends StatelessWidget {
     this.borderRadius = 0,
     this.borderColor,
     this.backgroundColor = Colors.white,
-    this.imageSrc,
-    this.icon,
-    this.iconSrc,
-    this.isPlaceholder = false,
+    this.opacity = 1,
   });
 
   final double width;
@@ -28,28 +23,34 @@ class ImageContainer extends StatelessWidget {
 
   final Color backgroundColor;
 
-  final String? imageSrc;
+  final double opacity;
+}
 
-  final Icon? icon;
-  final String? iconSrc;
+class ImageContainer extends StatelessWidget {
+  ImageContainer({
+    super.key,
+    this.icon,
+    this.image,
+    ImageContainerDecoration? decoration,
+  }) {
+    this.decoration = decoration ?? ImageContainerDecoration();
+  }
 
-  final bool isPlaceholder;
+  final Widget? icon;
+  final Image? image;
+  late final ImageContainerDecoration decoration;
 
   Widget _buildImage() {
     return SizedBox(
-      width: width,
-      height: height,
-      child: Image.asset(
-        imageSrc!,
-        fit: BoxFit.cover,
+      width: decoration.width,
+      height: decoration.height,
+      child: Opacity(
+        opacity: decoration.opacity,
+        child: FittedBox(
+          fit: BoxFit.cover,
+          child: image,
+        ),
       ),
-    );
-  }
-
-  Widget _buildIconSvg() {
-    return Align(
-      alignment: Alignment.center,
-      child: SvgPicture.asset(iconSrc!),
     );
   }
 
@@ -61,8 +62,10 @@ class ImageContainer extends StatelessWidget {
   }
 
   Border? _buildBorder() {
-    if (borderColor != null) {
-      return Border.all(color: borderColor!);
+    if (decoration.borderColor != null) {
+      return Border.all(
+        color: decoration.borderColor!,
+      );
     }
 
     return null;
@@ -71,14 +74,11 @@ class ImageContainer extends StatelessWidget {
   List<Widget> get _stackChildren {
     List<Widget> stackChildren = [];
 
-    if (imageSrc != null) {
+    if (image != null) {
       stackChildren.add(_buildImage());
     }
     if (icon != null) {
       stackChildren.add(_buildIcon());
-    }
-    if (iconSrc != null) {
-      stackChildren.add(_buildIconSvg());
     }
 
     return stackChildren;
@@ -87,25 +87,22 @@ class ImageContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
+      width: decoration.width,
+      height: decoration.height,
       margin: EdgeInsets.only(
-        bottom: marginBottom,
-        right: marginRight,
+        bottom: decoration.marginBottom,
+        right: decoration.marginRight,
       ),
       decoration: BoxDecoration(
         border: _buildBorder(),
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.circular(decoration.borderRadius),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.circular(decoration.borderRadius),
         child: Material(
-          color: backgroundColor,
-          child: Opacity(
-            opacity: isPlaceholder ? 0.4 : 1,
-            child: Stack(
-              children: _stackChildren,
-            ),
+          color: decoration.backgroundColor,
+          child: Stack(
+            children: _stackChildren,
           ),
         ),
       ),

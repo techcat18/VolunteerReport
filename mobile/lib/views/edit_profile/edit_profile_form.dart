@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/helpers/phone_validator.dart';
 import 'package:mobile/helpers/url_validator.dart';
+import 'package:mobile/widgets/image_container.dart';
 import 'package:mobile/widgets/inputs/reactive_dropdown.dart';
 import 'package:mobile/widgets/inputs/reactive_email_phone.dart';
+import 'package:mobile/widgets/inputs/reactive_image_picker.dart';
 import 'package:mobile/widgets/inputs/reactive_plain_text.dart';
 import 'package:mobile/widgets/inputs/reactive_url_field.dart';
 import 'package:mobile/widgets/submit_button.dart';
@@ -13,6 +16,7 @@ class EditProfileForm extends StatelessWidget {
 
   final _form = fb.group(
     {
+      "avatar": [],
       "name": [Validators.required],
       "organization": [Validators.required],
       "email": [
@@ -40,16 +44,16 @@ class EditProfileForm extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: theme.colorScheme.primaryContainer,
-                    ),
-                  ),
-                  margin: const EdgeInsets.only(
-                    right: 18,
+                ReactiveImagePicker(
+                  name: "avatar",
+                  icon: SvgPicture.asset("assets/edit.svg"),
+                  placeholder: Image.asset("assets/placeholder.png"),
+                  decoration: ImageContainerDecoration(
+                    width: 100,
+                    height: 100,
+                    opacity: 0.5,
+                    borderColor: theme.colorScheme.primaryContainer,
+                    marginRight: 18,
                   ),
                 ),
                 const Expanded(

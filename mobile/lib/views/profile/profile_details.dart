@@ -17,12 +17,16 @@ class ProfileDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ImageContainer(
-              width: 100,
-              height: 100,
-              marginRight: 14,
-              backgroundColor: theme.colorScheme.tertiaryContainer,
-              borderColor: theme.colorScheme.primary,
-              iconSrc: "assets/profile_icon_placeholder.svg",
+              icon: SvgPicture.asset(
+                "assets/profile_icon_placeholder.svg",
+              ),
+              decoration: ImageContainerDecoration(
+                width: 100,
+                height: 100,
+                marginRight: 14,
+                backgroundColor: theme.colorScheme.tertiaryContainer,
+                borderColor: theme.colorScheme.primary,
+              ),
             ),
             Text(
               "Volunteer’s name",
