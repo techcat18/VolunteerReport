@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/account/account_page.dart';
+import 'package:mobile/views/profile/profile_page.dart';
 import 'package:mobile/views/reports/add_report_button.dart';
 import 'package:mobile/views/reports/reports_list.dart';
 
 class ReportsPage extends StatelessWidget {
   const ReportsPage({super.key});
 
-  void _openAccountView(BuildContext context) {
+  void _openProfileView(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const AccountPage(),
+        builder: (context) => const ProfilePage(),
       ),
     );
   }
@@ -19,7 +19,7 @@ class ReportsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => _openAccountView(context),
+          onPressed: () => _openProfileView(context),
           iconSize: 40,
           splashRadius: 12,
           icon: const Icon(Icons.account_circle),

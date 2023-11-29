@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile/views/account/account_details.dart';
+import 'package:mobile/views/profile/profile_details.dart';
 import 'package:mobile/views/reports/reports_page.dart';
 
-class AccountPage extends StatelessWidget {
-  const AccountPage({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
-  void _closeAccountView(BuildContext context) {
+  void _closeProfileView(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const ReportsPage(),
@@ -21,7 +21,7 @@ class AccountPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.colorScheme.secondaryContainer,
       floatingActionButton: IconButton(
-        onPressed: () => _closeAccountView(context),
+        onPressed: () => _closeProfileView(context),
         icon: SvgPicture.asset("assets/cross_icon.svg"),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
@@ -35,7 +35,7 @@ class AccountPage extends StatelessWidget {
                   vertical: 75,
                   horizontal: 15,
                 ),
-                child: AccountDetails(),
+                child: ProfileDetails(),
               ),
             ),
           ],

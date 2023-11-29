@@ -1,34 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class ReactivePlainText extends StatelessWidget {
-  const ReactivePlainText({
+class ReactiveUrlField extends StatelessWidget {
+  const ReactiveUrlField({
     super.key,
-    this.maxLines = 1,
-    required this.label,
     required this.name,
+    required this.label,
   });
 
   final String name;
-  final int maxLines;
   final String label;
 
   @override
   Widget build(BuildContext context) {
     return ReactiveTextField(
-      maxLines: maxLines,
       formControlName: name,
-      keyboardType: TextInputType.text,
+      keyboardType: TextInputType.url,
       style: Theme.of(context).textTheme.labelMedium,
       decoration: InputDecoration(
         labelText: label,
       ),
       validationMessages: {
         ValidationMessage.required: (error) => "This is a required field!",
-        ValidationMessage.minLength: (error) =>
-            "Must be less than ${(error as Map)['requiredLength']} characters long!!",
-        ValidationMessage.maxLength: (error) =>
-            "Must be more than ${(error as Map)['requiredLength']} characters long!!",
+        "url": (error) => "Must be an actual valid url!"
       },
     );
   }

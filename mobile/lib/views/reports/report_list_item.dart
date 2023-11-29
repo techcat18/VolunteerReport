@@ -3,6 +3,7 @@ import 'package:mobile/helpers/text_style_extensions.dart';
 import 'package:mobile/models/report.dart';
 import 'package:mobile/views/reports/report_list_item_categories.dart';
 import 'package:mobile/views/reports/report_list_item_total.dart';
+import 'package:mobile/widgets/image_container.dart';
 
 class ReportsListItem extends StatelessWidget {
   const ReportsListItem({
@@ -33,19 +34,13 @@ class ReportsListItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 180,
-              margin: const EdgeInsets.only(
-                bottom: 12,
+            ImageContainer(
+              decoration: ImageContainerDecoration(
+                height: 180,
+                marginBottom: 12,
+                borderRadius: 15,
               ),
-              width: double.infinity,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
-                  "assets/placeholder.png",
-                  fit: BoxFit.cover,
-                ),
-              ),
+              image: Image.asset("assets/placeholder.png"),
             ),
             Text(
               "Description:",
