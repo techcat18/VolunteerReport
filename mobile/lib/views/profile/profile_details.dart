@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/views/profile/edit_profile_button.dart';
+import 'package:mobile/widgets/image_container.dart';
 
 class ProfileDetails extends StatelessWidget {
   const ProfileDetails({super.key});
@@ -15,22 +16,13 @@ class ProfileDetails extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
+            ImageContainer(
               width: 100,
               height: 100,
-              margin: const EdgeInsets.only(
-                right: 14,
-              ),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.tertiaryContainer,
-                border: Border.all(
-                  width: 1,
-                  color: theme.colorScheme.primary,
-                ),
-              ),
-              child: Center(
-                child: SvgPicture.asset("assets/profile_icon_placeholder.svg"),
-              ),
+              marginRight: 14,
+              backgroundColor: theme.colorScheme.tertiaryContainer,
+              borderColor: theme.colorScheme.primary,
+              iconSrc: "assets/profile_icon_placeholder.svg",
             ),
             Text(
               "Volunteer’s name",
