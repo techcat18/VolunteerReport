@@ -50,6 +50,7 @@ public static class DependencyRegistrar
     {
         services.AddScoped<IReportCategoryRepository, ReportCategoryRepository>();
         services.AddScoped<IVolunteerRepository, VolunteerRepository>();
+        services.AddScoped<IOrganizationRepository, OrganizationRepository>();
     }
     
     private static void ConfigureUnitOfWork(this IServiceCollection services)

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using VolunteerReport.Application.Abstractions.Application.Services;
+using VolunteerReport.Application.Abstractions.Persistence;
 using VolunteerReport.Common.DTOs.Auth;
 using VolunteerReport.Common.Exceptions.Auth;
 using VolunteerReport.Domain.Entities;
@@ -11,17 +12,20 @@ public class AuthService: IAuthService
 {
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IJwtService _jwtService;
     private readonly IMapper _mapper;
 
     public AuthService(
         UserManager<User> userManager, 
         SignInManager<User> signInManager, 
+        IUnitOfWork unitOfWork,
         IJwtService jwtService, 
         IMapper mapper)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _unitOfWork = unitOfWork;
         _jwtService = jwtService;
         _mapper = mapper;
     }
@@ -50,12 +54,11 @@ public class AuthService: IAuthService
     {
         var user = _mapper.Map<User>(signupDto);
 
-        var result = await _userManager.CreateAsync(user, signupDto.Password);
-
-        if (!result.Succeeded)
-        {
-            throw new Exception(result.Errors.First().Description);
-        }
+        await CreateUserAsync(user, signupDto.Password);
+        
+        var organization = await GetOrganizationAsync(signupDto.OrganizationId);
+        
+        await CreateVolunteerAsync(user.Id, organization?.Id);
     }
     
     #region Private methods
@@ -74,6 +77,39 @@ public class AuthService: IAuthService
         {
             throw new InvalidCredentialsAuthException();
         }
+    }
+
+    private async Task<Organization?> GetOrganizationAsync(Guid organizationId = default)
+    {
+        var organization = await _unitOfWork
+            .GetRepository<IOrganizationRepository>()
+            .GetByIdAsync(organizationId);
+        return organization;
+    }
+
+    private async Task CreateUserAsync(User user, string password)
+    {
+        var result = await _userManager.CreateAsync(user, password);
+
+        if (!result.Succeeded)
+        {
+            throw new Exception(result.Errors.First().Description);
+        }
+    }
+
+    private async Task CreateVolunteerAsync(Guid userId, Guid? organizationId = null)
+    {
+        var volunteer = new Volunteer
+        {
+            UserId = userId,
+            OrganizationId = organizationId
+        };
+
+        await _unitOfWork
+            .GetRepository<IVolunteerRepository>()
+            .AddAsync(volunteer);
+
+        await _unitOfWork.SaveChangesAsync();
     }
     
     #endregion
