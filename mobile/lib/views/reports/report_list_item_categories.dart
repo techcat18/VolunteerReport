@@ -1,51 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/helpers/text_style_extensions.dart';
 import 'package:mobile/models/report.dart';
+import 'package:mobile/widgets/category_chip.dart';
 
 class ReportListItemCategories extends StatelessWidget {
   const ReportListItemCategories._internal(this._categories);
 
   factory ReportListItemCategories.fromReport(Report report) {
-    var total = report.reportDetails
+    var categories = report.reportDetails
         .map(
-          (reportDetail) {
-            return reportDetail.reportCategory.name;
-          },
+          (reportDetail) => reportDetail.reportCategory.name,
         )
         .toSet()
         .toList();
 
-    return ReportListItemCategories._internal(total);
+    return ReportListItemCategories._internal(categories);
   }
 
   final List<String> _categories;
 
   List<Widget> _renderCategories(BuildContext context) {
-    var theme = Theme.of(context);
-
-    return _categories.map(
-      (category) {
-        return Container(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(5),
+    return _categories
+        .map(
+          (category) => CategoryChip(
+            categoryName: category,
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 2,
-              horizontal: 9,
-            ),
-            child: Text(
-              category,
-              style: theme.textTheme.bodyLarge!.copyWithWeight(
-                FontWeight.w500,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        );
-      },
-    ).toList();
+        )
+        .toList();
   }
 
   @override
