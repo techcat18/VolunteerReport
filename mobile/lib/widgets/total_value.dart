@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:mobile/helpers/currency_formatter.dart';
 import 'package:mobile/helpers/text_style_extensions.dart';
-import 'package:mobile/models/report.dart';
+import 'package:mobile/models/report_detail.dart';
 
-final _formatCurrency = NumberFormat.currency(
-  locale: "uk_UA",
-  symbol: "\u{20B4}",
-);
+class TotalValue extends StatelessWidget {
+  const TotalValue._internal(this._totalAmount);
 
-class ReportListItemTotal extends StatelessWidget {
-  const ReportListItemTotal._internal(this._totalAmount);
-
-  factory ReportListItemTotal.fromReport(Report report) {
-    var total = report.reportDetails.map(
+  factory TotalValue.fromReport(List<ReportDetail> reportDetails) {
+    var total = reportDetails.map(
       (reportDetail) {
         return reportDetail.amount * reportDetail.cost;
       },
@@ -22,7 +17,7 @@ class ReportListItemTotal extends StatelessWidget {
       },
     );
 
-    return ReportListItemTotal._internal(total);
+    return TotalValue._internal(total);
   }
 
   final double _totalAmount;
@@ -46,7 +41,7 @@ class ReportListItemTotal extends StatelessWidget {
             top: 6,
           ),
           child: Text(
-            _formatCurrency.format(_totalAmount),
+            currencyFormatter.format(_totalAmount),
             style: textTheme.bodyLarge!.copyWithWeight(
               FontWeight.w600,
               color: theme.colorScheme.secondary,
