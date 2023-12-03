@@ -1,9 +1,12 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using VolunteerReport.Application.Abstractions.Application.Services;
+using VolunteerReport.Application.Authorization.Handlers;
+using VolunteerReport.Application.Authorization.Policies;
 using VolunteerReport.Application.MappingProfiles;
 using VolunteerReport.Application.Services;
 using VolunteerReport.Common.Options;
@@ -18,6 +21,7 @@ public static class DependencyRegistrar
         services.ConfigureAutomapper();
         services.ConfigureJwtAuthentication(configuration);
         services.ConfigureOptions();
+        services.ConfigureAuthorizationHandlers();
     }
     
     private static void ConfigureServices(this IServiceCollection services){
@@ -26,6 +30,7 @@ public static class DependencyRegistrar
         services.AddScoped<IVolunteerService, VolunteerService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IOrganizationService, OrganizationService>();
     }}
     
     private static void ConfigureAutomapper(this IServiceCollection services)
@@ -75,5 +80,11 @@ public static class DependencyRegistrar
     private static void ConfigureOptions(this IServiceCollection services)
     {
         services.ConfigureOptions<JwtOptionsSetup>();
+    }
+    
+    private static void ConfigureAuthorizationHandlers(this IServiceCollection services)
+    {
+        services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
+        services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
     }
 }

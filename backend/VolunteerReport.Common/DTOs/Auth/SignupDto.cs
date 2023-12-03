@@ -7,4 +7,5 @@ public class SignupDto
     public string LastName { get; set; }
     public DateTime BirthDate { get; set; }
     public string Password { get; set; }
+    public Guid OrganizationId { get; set; }
 }

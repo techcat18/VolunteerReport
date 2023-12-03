@@ -2,6 +2,7 @@
 using VolunteerReport.Application.Abstractions.Application.Services;
 using VolunteerReport.Application.Abstractions.Persistence;
 using VolunteerReport.Common.DTOs.Volunteer;
+using VolunteerReport.Common.Utility;
 using VolunteerReport.Domain.Entities;
 
 namespace VolunteerReport.Application.Services;
@@ -19,12 +20,21 @@ public class VolunteerService: IVolunteerService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<VolunteerDto>> GetVolunteersAsync(CancellationToken cancellationToken = default)
+    public async Task<PaginatedList<VolunteerDto>> GetVolunteersAsync(
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default)
     {
         var volunteers = await _unitOfWork
             .GetRepository<IVolunteerRepository>()
-            .GetAllAsync(cancellationToken);
-        return _mapper.Map<IEnumerable<VolunteerDto>>(volunteers);
+            .GetAllAsync(pageNumber, pageSize, cancellationToken);
+        var totalCount = await _unitOfWork
+            .GetRepository<IVolunteerRepository>()
+            .GetCountAsync(cancellationToken);
+        
+        var volunteerDtos = _mapper.Map<IEnumerable<VolunteerDto>>(volunteers);
+        
+        return new PaginatedList<VolunteerDto>(volunteerDtos, totalCount, pageNumber, pageSize);
     }
 
     public async Task<VolunteerDto?> GetVolunteerByIdAsync(

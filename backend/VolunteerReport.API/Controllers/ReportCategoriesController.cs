@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VolunteerReport.Application.Abstractions.Application.Services;
+using VolunteerReport.Application.Authorization.Attributes;
 using VolunteerReport.Common.Constants;
 using VolunteerReport.Common.DTOs.Report;
 
@@ -16,6 +17,7 @@ public class ReportCategoriesController: ControllerBase
         _reportCategoryService = reportCategoryService;
     }
 
+    [HasPermission(Constants.Permissions.ReportCategories.List)]
     [HttpGet(Constants.ApiEndpoints.ReportCategories.GetAll)]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
     {
@@ -23,6 +25,7 @@ public class ReportCategoriesController: ControllerBase
         return Ok(reportCategories);
     }
     
+    [HasPermission(Constants.Permissions.ReportCategories.View)]
     [HttpGet(Constants.ApiEndpoints.ReportCategories.GetById)]
     public async Task<IActionResult> GetById(
         [FromRoute] Guid id,
@@ -32,6 +35,7 @@ public class ReportCategoriesController: ControllerBase
         return Ok(reportCategory);
     }
 
+    [HasPermission(Constants.Permissions.ReportCategories.Create)]
     [HttpPost(Constants.ApiEndpoints.ReportCategories.Create)]
     public async Task<IActionResult> Create(
         [FromBody] CreateReportCategoryDto createReportCategoryDto,
@@ -42,6 +46,7 @@ public class ReportCategoriesController: ControllerBase
         return Ok(reportCategory);
     }
 
+    [HasPermission(Constants.Permissions.ReportCategories.Update)]
     [HttpPut(Constants.ApiEndpoints.ReportCategories.Update)]
     public async Task<IActionResult> Update(
         [FromRoute] Guid id,
@@ -52,6 +57,7 @@ public class ReportCategoriesController: ControllerBase
         return NoContent();
     }
 
+    [HasPermission(Constants.Permissions.ReportCategories.Delete)]
     [HttpDelete(Constants.ApiEndpoints.ReportCategories.Delete)]
     public async Task<IActionResult> Delete(
         [FromRoute] Guid id,
