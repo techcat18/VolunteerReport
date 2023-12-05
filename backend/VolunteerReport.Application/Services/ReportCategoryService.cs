@@ -2,6 +2,7 @@
 using VolunteerReport.Application.Abstractions.Application.Services;
 using VolunteerReport.Application.Abstractions.Persistence;
 using VolunteerReport.Common.DTOs.Report;
+using VolunteerReport.Common.DTOs.ReportCategory;
 using VolunteerReport.Domain.Entities;
 
 namespace VolunteerReport.Application.Services;
