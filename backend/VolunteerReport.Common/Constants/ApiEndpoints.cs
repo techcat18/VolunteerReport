@@ -25,7 +25,17 @@ public partial class Constants
             public const string Update = $"{Base}/{IdPlaceholder}";
             public const string Delete = $"{Base}/{IdPlaceholder}";
         }
-        
+
+        public static class Reports
+        {
+            public const string Base = "/api/v1/reports";
+            public const string GetAll = Base;
+            public const string GetById = $"{Base}/{IdPlaceholder}";
+            public const string Create = Base;
+            public const string Update = $"{Base}/{IdPlaceholder}";
+            public const string Delete = $"{Base}/{IdPlaceholder}";
+        }
+
         public static class Organizations
         {
             public const string Base = "/api/v1/organizations";

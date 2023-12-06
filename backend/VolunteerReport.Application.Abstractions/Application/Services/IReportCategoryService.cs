@@ -1,4 +1,4 @@
-﻿using VolunteerReport.Common.DTOs.Report;
+﻿using VolunteerReport.Common.DTOs.ReportCategory;
 
 namespace VolunteerReport.Application.Abstractions.Application.Services;
 

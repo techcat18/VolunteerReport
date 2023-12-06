@@ -1,4 +1,4 @@
-﻿namespace VolunteerReport.Common.DTOs.Report;
+﻿namespace VolunteerReport.Common.DTOs.ReportCategory;
 
 public class CreateReportCategoryDto
 {
