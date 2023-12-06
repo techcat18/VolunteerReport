@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/themes/app_color_scheme.dart';
+import 'package:mobile/themes/app_input_theme.dart';
+import 'package:mobile/themes/app_text_theme.dart';
 
-import 'package:mobile/views/login_page.dart';
+import 'package:mobile/views/login/login_page.dart';
 
-final theme = ThemeData(
+final _theme = ThemeData(
   useMaterial3: true,
+  colorScheme: appColorScheme,
+  scaffoldBackgroundColor: Colors.white,
+  inputDecorationTheme: AppInputTheme().theme(),
+  textTheme: appTextTheme,
 );
 
 void main() {
@@ -16,7 +23,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
+      theme: _theme,
       home: const LoginPage(),
     );
   }
