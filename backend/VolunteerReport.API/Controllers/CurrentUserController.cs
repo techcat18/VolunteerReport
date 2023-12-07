@@ -6,7 +6,7 @@ using VolunteerReport.Common.Constants;
 
 namespace VolunteerReport.API.Controllers;
 
-//[Authorize]
+[Authorize]
 [ApiController]
 [Route(Constants.ApiEndpoints.CurrentUser.Base)]
 public class CurrentUserController: ControllerBase
