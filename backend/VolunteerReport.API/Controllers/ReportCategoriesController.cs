@@ -2,7 +2,7 @@
 using VolunteerReport.Application.Abstractions.Application.Services;
 using VolunteerReport.Application.Authorization.Attributes;
 using VolunteerReport.Common.Constants;
-using VolunteerReport.Common.DTOs.Report;
+using VolunteerReport.Common.DTOs.ReportCategory;
 
 namespace VolunteerReport.API.Controllers;
 
