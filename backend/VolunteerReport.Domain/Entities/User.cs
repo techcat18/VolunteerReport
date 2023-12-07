@@ -12,5 +12,5 @@ public class User: IdentityUser<Guid>, IBaseEntity
     public bool IsDeleted { get; set; }
     
     public Guid? VolunteerId { get; set; }
-    public Volunteer? Volunteer { get; set; }
+    public Volunteer Volunteer { get; set; }
 }

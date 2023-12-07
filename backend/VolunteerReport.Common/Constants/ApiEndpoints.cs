@@ -64,5 +64,18 @@ public partial class Constants
             public const string Login = $"{Base}/login";
             public const string Signup = $"{Base}/signup";
         }
+
+        public static class Users
+        {
+            public const string Base = "/api/v1/users";
+            public const string GetAll = Base;
+            public const string GetById = $"{Base}/{IdPlaceholder}";
+        }
+
+        public static class CurrentUser
+        {
+            public const string Base = "/api/v1";
+            public const string Info = $"{Base}/me";
+        }
     }
 }

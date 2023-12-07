@@ -99,12 +99,17 @@ public class AuthService: IAuthService
 
     private async Task CreateVolunteerAsync(Guid userId, Guid? organizationId = null)
     {
+        var user = await _unitOfWork.GetRepository<IUserRepository>().GetByIdAsync(userId);
+        
         var volunteer = new Volunteer
         {
-            UserId = userId,
+            Id = Guid.NewGuid(),
+            UserId = user!.Id,
             OrganizationId = organizationId
         };
 
+        user.Volunteer = volunteer;
+        
         await _unitOfWork
             .GetRepository<IVolunteerRepository>()
             .AddAsync(volunteer);

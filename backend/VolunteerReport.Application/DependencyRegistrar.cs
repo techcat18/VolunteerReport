@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using VolunteerReport.Application.Abstractions.Application;
 using VolunteerReport.Application.Abstractions.Application.Services;
 using VolunteerReport.Application.Authorization.Handlers;
 using VolunteerReport.Application.Authorization.Policies;
 using VolunteerReport.Application.MappingProfiles;
 using VolunteerReport.Application.Services;
+using VolunteerReport.Application.Utility;
 using VolunteerReport.Common.Options;
 
 namespace VolunteerReport.Application;
@@ -22,6 +24,7 @@ public static class DependencyRegistrar
         services.ConfigureJwtAuthentication(configuration);
         services.ConfigureOptions();
         services.ConfigureAuthorizationHandlers();
+        services.AddContextAccessor();
     }
     
     private static void ConfigureServices(this IServiceCollection services){
@@ -30,12 +33,19 @@ public static class DependencyRegistrar
         services.AddScoped<IVolunteerService, VolunteerService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IOrganizationService, OrganizationService>();
     }}
     
     private static void ConfigureAutomapper(this IServiceCollection services)
     {
         services.AddAutoMapper(typeof(ReportCategoryMappingProfile).Assembly);
+    }
+
+    private static void AddContextAccessor(this IServiceCollection services)
+    {
+        services.AddHttpContextAccessor();
+        services.AddScoped<IContextAccessor, ContextAccessor>();
     }
     
     private static void ConfigureJwtAuthentication(
