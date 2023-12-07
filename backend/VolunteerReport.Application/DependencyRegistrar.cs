@@ -33,6 +33,7 @@ public static class DependencyRegistrar
         services.AddScoped<IVolunteerService, VolunteerService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IOrganizationService, OrganizationService>();
     }}
     

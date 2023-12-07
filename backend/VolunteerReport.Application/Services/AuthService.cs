@@ -104,9 +104,11 @@ public class AuthService: IAuthService
         var volunteer = new Volunteer
         {
             Id = Guid.NewGuid(),
-            UserId = userId,
+            UserId = user!.Id,
             OrganizationId = organizationId
         };
+
+        user.Volunteer = volunteer;
         
         await _unitOfWork
             .GetRepository<IVolunteerRepository>()

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using VolunteerReport.Application.Abstractions.Application;
 
 namespace VolunteerReport.Application.Utility;
@@ -14,7 +15,13 @@ public class ContextAccessor: IContextAccessor
 
     public Guid GetCurrentUserId()
     {
-        var name = _httpContextAccessor.HttpContext.User.Identity.Name;
-        return Guid.NewGuid();
+        var idClaim = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(x =>
+            x.Type == ClaimTypes.NameIdentifier);
+        if (idClaim is null)
+        {
+            throw new Exception("Not authorized");
+        }
+
+        return Guid.Parse(idClaim.Value);
     }
 }
