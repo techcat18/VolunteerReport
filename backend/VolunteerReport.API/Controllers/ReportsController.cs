@@ -24,6 +24,15 @@ namespace VolunteerReport.API.Controllers
             return Ok(reports);
         }
 
+        [HttpGet(Constants.ApiEndpoints.Reports.GetByVolunteerId)]
+        public async Task<IActionResult> GetByVolunteerId(
+            [FromRoute] Guid volunteerId,
+            CancellationToken cancellationToken)
+        {
+            var reports = await _reportService.GetReportsByVolunteerId(volunteerId, cancellationToken);
+            return Ok(reports);
+        }
+        
         [HttpGet(Constants.ApiEndpoints.Reports.GetById)]
         public async Task<IActionResult> GetById(
             [FromRoute] Guid id,

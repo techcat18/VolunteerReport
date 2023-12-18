@@ -2,6 +2,8 @@
 using VolunteerReport.Application.Abstractions.Application.Services;
 using VolunteerReport.Application.Abstractions.Persistence;
 using VolunteerReport.Common.DTOs.Volunteer;
+using VolunteerReport.Common.Exceptions.Organizations;
+using VolunteerReport.Common.Exceptions.Volunteers;
 using VolunteerReport.Common.Utility;
 using VolunteerReport.Domain.Entities;
 
@@ -21,8 +23,8 @@ public class VolunteerService: IVolunteerService
     }
 
     public async Task<PaginatedList<VolunteerDto>> GetVolunteersAsync(
-        int pageNumber,
-        int pageSize,
+        int pageNumber = 1,
+        int pageSize = 10,
         CancellationToken cancellationToken = default)
     {
         var volunteers = await _unitOfWork
@@ -69,12 +71,27 @@ public class VolunteerService: IVolunteerService
         UpdateVolunteerDto updateVolunteerDto,
         CancellationToken cancellationToken = default)
     {
-        var volunteer = await _unitOfWork
-            .GetRepository<IVolunteerRepository>()
+        var volunteer = await _unitOfWork.GetRepository<IVolunteerRepository>()
             .GetByIdAsync(id, cancellationToken);
         if (volunteer is null)
         {
-            throw new Exception("Volunteer was not found");
+            throw new VolunteerNotFoundException();
+        }
+
+        volunteer.HelpDirection = updateVolunteerDto.HelpDirection;
+        volunteer.ShortInfo = updateVolunteerDto.ShortInfo;
+        volunteer.DonationLink = updateVolunteerDto.DonationLink;
+
+        if (updateVolunteerDto.OrganizationId is not null)
+        {
+            var organization = await _unitOfWork.GetRepository<IOrganizationRepository>()
+                .GetByIdAsync(updateVolunteerDto.OrganizationId.Value, cancellationToken);
+            if (organization is null)
+            {
+                throw new OrganizationNotFoundException();
+            }
+
+            volunteer.OrganizationId = organization.Id;
         }
 
         _unitOfWork.GetRepository<IVolunteerRepository>().Update(volunteer);

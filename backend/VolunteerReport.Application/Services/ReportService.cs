@@ -2,6 +2,7 @@
 using VolunteerReport.Application.Abstractions.Application.Services;
 using VolunteerReport.Application.Abstractions.Persistence;
 using VolunteerReport.Common.DTOs.Report;
+using VolunteerReport.Common.Exceptions.Volunteers;
 using VolunteerReport.Common.Utility;
 using VolunteerReport.Domain.Entities;
 
@@ -69,6 +70,22 @@ namespace VolunteerReport.Application.Services
             var reportDtos = _mapper.Map<IEnumerable<ReportDto>>(reports);
 
             return new PaginatedList<ReportDto>(reportDtos, totalCount, pageNumber, pageSize);
+        }
+
+        public async Task<IEnumerable<ReportDto>> GetReportsByVolunteerId(Guid volunteerId,
+            CancellationToken cancellationToken = default)
+        {
+            var volunteer = await _unitOfWork.GetRepository<IVolunteerRepository>()
+                .GetByIdAsync(volunteerId, cancellationToken);
+            if (volunteer is null)
+            {
+                throw new VolunteerNotFoundException();
+            }
+
+            var reports = await _unitOfWork.GetRepository<IReportRepository>()
+                .GetByVolunteerIdAsync(volunteerId, cancellationToken);
+            
+            return _mapper.Map<IEnumerable<ReportDto>>(reports);
         }
 
         public async Task UpdateReportAsync(Guid id, UpdateReportDto updateReportDto, CancellationToken cancellationToken = default)

@@ -30,6 +30,7 @@ public partial class Constants
         {
             public const string Base = "/api/v1/reports";
             public const string GetAll = Base;
+            public const string GetByVolunteerId = "/api/v1/volunteers/{volunteerId}/reports";
             public const string GetById = $"{Base}/{IdPlaceholder}";
             public const string Create = Base;
             public const string Update = $"{Base}/{IdPlaceholder}";

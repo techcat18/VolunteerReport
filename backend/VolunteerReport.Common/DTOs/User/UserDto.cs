@@ -9,4 +9,6 @@ public class UserDto
     public Guid OrganizationId { get; set; }
     public string HelpDirection { get; set; }
     public string ShortInfo { get; set; }
+    public string DonationLink { get; set; }
+    public Guid? VolunteerId { get; set; }
 }

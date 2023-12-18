@@ -11,6 +11,7 @@ using VolunteerReport.Application.Authorization.Policies;
 using VolunteerReport.Application.MappingProfiles;
 using VolunteerReport.Application.Services;
 using VolunteerReport.Application.Utility;
+using VolunteerReport.Common.DTOs.Report;
 using VolunteerReport.Common.Options;
 
 namespace VolunteerReport.Application;
@@ -35,6 +36,7 @@ public static class DependencyRegistrar
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IOrganizationService, OrganizationService>();
+        services.AddScoped<IReportService, ReportService>();
     }}
     
     private static void ConfigureAutomapper(this IServiceCollection services)
