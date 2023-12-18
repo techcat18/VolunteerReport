@@ -11,13 +11,13 @@ public class VolunteerRepository: GenericRepository<Volunteer>, IVolunteerReposi
     }
 
     public async Task<IEnumerable<Volunteer>> GetAllAsync(
-        int skip,
-        int take,
+        int pageNumber = 1,
+        int pageSize = 10,
         CancellationToken cancellationToken = default)
     {
         return await DbSet
-            .Skip(skip)
-            .Take(take)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync(cancellationToken);
     }
 

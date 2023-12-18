@@ -23,6 +23,13 @@ namespace VolunteerReport.Persistence.Repositories
             .ToListAsync(cancellationToken);
         }
 
+        public async Task<IEnumerable<Report>> GetByVolunteerIdAsync(Guid volunteerId, CancellationToken cancellationToken = default)
+        {
+            return await DbSet
+                .Where(x => x.VolunteerId == volunteerId)
+                .ToListAsync(cancellationToken);
+        }
+
         public async Task<int> GetCountAsync(CancellationToken cancellationToken = default)
         {
             return await DbSet.CountAsync(cancellationToken);

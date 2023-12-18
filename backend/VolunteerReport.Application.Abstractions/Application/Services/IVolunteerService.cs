@@ -5,7 +5,8 @@ namespace VolunteerReport.Application.Abstractions.Application.Services;
 
 public interface IVolunteerService
 {
-    Task<PaginatedList<VolunteerDto>> GetVolunteersAsync(int pageNumber, int pageSize, CancellationToken cancellationToken = default);
+    Task<PaginatedList<VolunteerDto>> GetVolunteersAsync(int pageNumber = 1, int pageSize = 10, 
+        CancellationToken cancellationToken = default);
     Task<VolunteerDto?> GetVolunteerByIdAsync(Guid id, CancellationToken cancellationToken = default);
     Task<VolunteerDto> CreateVolunteerAsync(CreateVolunteerDto createVolunteerDto,
         CancellationToken cancellationToken = default);

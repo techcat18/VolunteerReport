@@ -6,6 +6,7 @@ namespace VolunteerReport.Application.Abstractions.Application.Services
     public interface IReportService
     {
         Task<PaginatedList<ReportDto>> GetReportsAsync(int pageNumber, int pageSize, CancellationToken cancellationToken = default);
+        Task<IEnumerable<ReportDto>> GetReportsByVolunteerId(Guid volunteerId, CancellationToken cancellationToken = default);
         Task<ReportDto?> GetReportByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<ReportDto> CreateReportAsync(CreateReportDto createReportDto,
             CancellationToken cancellationToken = default);

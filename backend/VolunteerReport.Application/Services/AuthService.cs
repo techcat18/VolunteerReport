@@ -58,7 +58,7 @@ public class AuthService: IAuthService
         
         var organization = await GetOrganizationAsync(signupDto.OrganizationId);
         
-        await CreateVolunteerAsync(user.Id, organization?.Id);
+        await CreateVolunteerAsync(user.Id, signupDto);
     }
     
     #region Private methods
@@ -97,22 +97,31 @@ public class AuthService: IAuthService
         }
     }
 
-    private async Task CreateVolunteerAsync(Guid userId, Guid? organizationId = null)
+    private async Task CreateVolunteerAsync(Guid userId, SignupDto signupDto)
     {
         var user = await _unitOfWork.GetRepository<IUserRepository>().GetByIdAsync(userId);
+
+        var organization = await _unitOfWork.GetRepository<IOrganizationRepository>()
+            .GetByIdAsync(signupDto.OrganizationId);
         
         var volunteer = new Volunteer
         {
             Id = Guid.NewGuid(),
             UserId = user!.Id,
-            OrganizationId = organizationId
+            OrganizationId = organization?.Id,
+            HelpDirection = signupDto.HelpDirection,
+            ShortInfo = signupDto.ShortInfo,
+            DonationLink = signupDto.DonationLink
         };
 
         user.Volunteer = volunteer;
+        user.VolunteerId = volunteer.Id;
         
         await _unitOfWork
             .GetRepository<IVolunteerRepository>()
             .AddAsync(volunteer);
+
+        _unitOfWork.GetRepository<IUserRepository>().Update(user);
 
         await _unitOfWork.SaveChangesAsync();
     }
