@@ -11,7 +11,7 @@ namespace VolunteerReport.Common.DTOs.Report
         public string Description { get; set; }
         public string Direction { get; set; }
         public DateTime? ModifiedAt = DateTime.Now;
-
         public Guid VolunteerId { get; set; }
+        public ICollection<CreateReportDto> Details { get; set; }
     }
 }
