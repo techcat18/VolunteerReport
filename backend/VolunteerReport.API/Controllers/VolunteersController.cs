@@ -18,9 +18,9 @@ public class VolunteersController: ControllerBase
     
     [HttpGet(Constants.ApiEndpoints.Volunteers.GetAll)]
     public async Task<IActionResult> GetAll(
-        [FromQuery] int pageNumber,
-        [FromQuery] int pageSize,
-        CancellationToken cancellationToken)
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10,
+        CancellationToken cancellationToken = default)
     {
         var volunteers = await _volunteerService.GetVolunteersAsync(pageNumber, pageSize, cancellationToken);
         return Ok(volunteers);
