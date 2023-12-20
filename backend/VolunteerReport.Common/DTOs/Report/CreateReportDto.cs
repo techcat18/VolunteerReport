@@ -1,4 +1,6 @@
-﻿namespace VolunteerReport.Common.DTOs.Report
+﻿using VolunteerReport.Common.DTOs.ReportDetail;
+
+namespace VolunteerReport.Common.DTOs.Report
 {
     public class CreateReportDto
     {
@@ -6,6 +8,6 @@
         public string Direction { get; set; }
         public DateTime? CreatedAt = DateTime.Now;
         public Guid VolunteerId { get; set; }
-        public ICollection<CreateReportDto> Details { get; set; }
+        public ICollection<CreateReportDetailDto> Details { get; set; }
     }
 }

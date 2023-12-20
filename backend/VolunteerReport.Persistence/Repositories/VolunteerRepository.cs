@@ -18,6 +18,7 @@ public class VolunteerRepository: GenericRepository<Volunteer>, IVolunteerReposi
         return await DbSet
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .Include(x => x.Reports)
             .ToListAsync(cancellationToken);
     }
 

@@ -20,13 +20,22 @@ namespace VolunteerReport.Persistence.Repositories
             return await DbSet
             .Skip(skip)
             .Take(take)
+            .Include(x => x.ReportDetails)
             .ToListAsync(cancellationToken);
+        }
+
+        public override async Task<Report?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await DbSet
+                .Include(x => x.ReportDetails)
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public async Task<IEnumerable<Report>> GetByVolunteerIdAsync(Guid volunteerId, CancellationToken cancellationToken = default)
         {
             return await DbSet
                 .Where(x => x.VolunteerId == volunteerId)
+                .Include(x => x.ReportDetails)
                 .ToListAsync(cancellationToken);
         }
 

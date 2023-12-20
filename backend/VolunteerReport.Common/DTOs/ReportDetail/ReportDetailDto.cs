@@ -1,5 +1,4 @@
-﻿using VolunteerReport.Common.DTOs.Report;
-using VolunteerReport.Common.DTOs.ReportCategory;
+﻿using VolunteerReport.Common.DTOs.ReportCategory;
 
 namespace VolunteerReport.Common.DTOs.ReportDetail
 {
@@ -13,7 +12,6 @@ namespace VolunteerReport.Common.DTOs.ReportDetail
         public bool IsDeleted { get; set; }
 
         public Guid ReportId { get; set; }
-        public ReportDto Report { get; set; }
         public Guid CategoryId { get; set; }
         public ReportCategoryDto Category { get; set; }
     }

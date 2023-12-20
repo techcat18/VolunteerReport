@@ -16,9 +16,9 @@ namespace VolunteerReport.API.Controllers
 
         [HttpGet(Constants.ApiEndpoints.Reports.GetAll)]
         public async Task<IActionResult> GetAll(
-            [FromQuery] int pageNumber,
-            [FromQuery] int pageSize,
-            CancellationToken cancellationToken)
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10,
+            CancellationToken cancellationToken = default)
         {
             var reports = await _reportService.GetReportsAsync(pageNumber, pageSize, cancellationToken);
             return Ok(reports);
@@ -47,9 +47,9 @@ namespace VolunteerReport.API.Controllers
             [FromBody] CreateReportDto createReportDto,
             CancellationToken cancellationToken)
         {
-            var report = await _reportService
+           await _reportService
                 .CreateReportAsync(createReportDto, cancellationToken);
-            return Ok(report);
+            return NoContent();
         }
 
         [HttpPut(Constants.ApiEndpoints.Reports.Update)]
