@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/bloc/user_bloc.dart';
 import 'package:mobile/views/sign_up/sign_up_form.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -20,18 +22,28 @@ class SignUpPage extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
-      body: const SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverFillRemaining(
-              hasScrollBody: false,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(32, 80, 32, 40),
-                child: SignUpForm(),
-              ),
-            )
-          ],
-        ),
+      body: BlocBuilder<UserBloc, UserState>(
+        builder: (context, state) {
+          if (state is AuthLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return const SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(32, 80, 32, 40),
+                    child: SignUpForm(),
+                  ),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }

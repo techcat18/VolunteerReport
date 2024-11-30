@@ -24,12 +24,12 @@ class EditProfilePage extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
-      body: CustomScrollView(
+      body: const CustomScrollView(
         slivers: [
           SliverFillRemaining(
             hasScrollBody: false,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(32, 40, 32, 40),
+              padding: EdgeInsets.fromLTRB(32, 40, 32, 40),
               child: EditProfileForm(),
             ),
           )

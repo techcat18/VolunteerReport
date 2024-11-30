@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/bloc/reports_bloc.dart';
 import 'package:mobile/helpers/text_style_extensions.dart';
 import 'package:mobile/models/report.dart';
 import 'package:mobile/views/reports/report_list_item_categories.dart';
@@ -15,11 +19,10 @@ class ReportsListItem extends StatelessWidget {
   final Report report;
 
   void onSelectReport(BuildContext context) {
+    context.read<ReportBloc>().add(ReportSelected(report.id));
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ViewReportPage(
-          reportId: report.id,
-        ),
+        builder: (context) => const ViewReportPage(),
       ),
     );
   }
@@ -53,7 +56,9 @@ class ReportsListItem extends StatelessWidget {
                   marginBottom: 12,
                   borderRadius: 15,
                 ),
-                image: Image.asset("assets/placeholder.png"),
+                image: report.photo != null
+                    ? Image.file(File(report.photo!))
+                    : Image.asset("assets/img/placeholder.png"),
               ),
               Text(
                 "Description:",
