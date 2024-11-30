@@ -1,8 +1,8 @@
-class ReportCategory {
+class Organization {
   int id;
   String name;
 
-  ReportCategory({
+  Organization({
     required this.id,
     required this.name,
   });

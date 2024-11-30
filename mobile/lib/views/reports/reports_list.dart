@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/views/reports/dummy_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:mobile/bloc/reports_bloc.dart';
 import 'package:mobile/views/reports/report_list_item.dart';
 
 class ReportsList extends StatelessWidget {
@@ -7,10 +9,12 @@ class ReportsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<ReportBloc>().state as ReportsSuccess;
+
     return SliverList.builder(
-      itemCount: dummyData.length,
+      itemCount: state.reports.length,
       itemBuilder: (context, index) {
-        final report = dummyData[index];
+        final report = state.reports[index];
 
         return ReportsListItem(report: report);
       },

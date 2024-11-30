@@ -6,7 +6,7 @@ class UrlValidator extends Validator<dynamic> {
   bool _isUrl(String input) {
     final uri = Uri.tryParse(input);
 
-    if (uri == null || !uri.hasAbsolutePath || !uri.scheme.startsWith('http')) {
+    if (uri == null || !uri.scheme.startsWith('http')) {
       return false;
     }
 

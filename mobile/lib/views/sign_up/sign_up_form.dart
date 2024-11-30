@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/bloc/user_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/data/organization_repository.dart';
 import 'package:mobile/widgets/submit_button.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -57,8 +60,35 @@ class _SignUpFormState extends State<SignUpForm> {
     ],
   );
 
+  void _signUp() {
+    if (_form.valid) {
+      final name = _form.value['name'] as String;
+      final about = _form.value['about'] as String;
+      final login = _form.value['email'] as String;
+      final password = _form.value['password'] as String;
+      final organization = _form.value['organization'] as String;
+
+      final isEmail = EmailValidator.emailRegex.hasMatch(login);
+
+      context.read<UserBloc>().add(
+            AuthRegisterRequested(
+              name: name,
+              about: about,
+              password: password,
+              organization: organization,
+              email: isEmail ? login : '',
+              phone: isEmail ? '' : login,
+            ),
+          );
+    } else {
+      _form.markAllAsTouched();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final getOrganizations = context.read<OrganizationRepository>().getAll;
+
     return ReactiveForm(
       formGroup: _form,
       child: Column(
@@ -73,16 +103,13 @@ class _SignUpFormState extends State<SignUpForm> {
               label: "About",
             ),
             const ReactiveEmailPhone(name: "email"),
-            const ReactiveDropdown(
+            ReactiveDropdown(
               name: "organization",
               label: "Organization",
-              items: [
-                "Organization 1",
-                "Organization 2",
-                "Organization 3",
-                "Organization 4",
-                "Organization 5",
-              ],
+              getItems: () async {
+                final organizations = await getOrganizations();
+                return organizations.map((o) => o.name).toList();
+              },
             ),
             const ReactivePassword(name: "password"),
             ReactiveFormConsumer(
@@ -102,7 +129,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             const Spacer(),
             SubmitButton(
-              onSubmit: () {},
+              onSubmit: () => _signUp(),
               text: "Create",
             ),
           ],

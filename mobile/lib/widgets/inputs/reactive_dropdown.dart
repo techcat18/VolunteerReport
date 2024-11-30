@@ -10,12 +10,12 @@ class ReactiveDropdown extends StatefulWidget {
     super.key,
     required this.name,
     required this.label,
-    required this.items,
+    required this.getItems,
   });
 
   final String name;
   final String label;
-  final List<String> items;
+  final Future<List<String>> Function() getItems;
 
   @override
   State<ReactiveDropdown> createState() => _ReactiveDropdownState();
@@ -24,6 +24,8 @@ class ReactiveDropdown extends StatefulWidget {
 class _ReactiveDropdownState extends State<ReactiveDropdown> {
   Size? _offsetSize;
   bool _isFocused = false;
+  bool _isLoading = false;
+  List<String> _items = [];
   final _focusNode = FocusNode();
   final _layerLink = LayerLink();
   final OverlayPortalController _dropdownController = OverlayPortalController();
@@ -36,6 +38,7 @@ class _ReactiveDropdownState extends State<ReactiveDropdown> {
       if (_focusNode.hasFocus) {
         _offsetSize ??= context.size!;
         _dropdownController.show();
+        _loadItems();
       } else {
         _dropdownController.hide();
       }
@@ -43,6 +46,21 @@ class _ReactiveDropdownState extends State<ReactiveDropdown> {
         _isFocused = _focusNode.hasFocus;
       });
     });
+  }
+
+  void _loadItems() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      final items = await widget.getItems();
+      setState(() {
+        _isLoading = false;
+        _items = items;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   Widget _buildOverlayChild(BuildContext context) {
@@ -65,8 +83,15 @@ class _ReactiveDropdownState extends State<ReactiveDropdown> {
       child: ReactiveValueListenableBuilder(
         formControlName: widget.name,
         builder: (context, control, child) {
+          if (_isLoading) {
+            return const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+
           var currentValue = (control.value ?? "") as String;
-          var filteredItems = widget.items
+          var filteredItems = _items
               .where(
                 (item) => item.contains(currentValue),
               )

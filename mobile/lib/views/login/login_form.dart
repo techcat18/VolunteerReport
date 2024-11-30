@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/bloc/user_bloc.dart';
 import 'package:mobile/helpers/phone_validator.dart';
 import 'package:mobile/views/login/forgot_password_button.dart';
-import 'package:mobile/views/reports/reports_page.dart';
 import 'package:mobile/widgets/inputs/reactive_email_phone.dart';
 import 'package:mobile/widgets/inputs/reactive_password.dart';
 import 'package:mobile/widgets/submit_button.dart';
@@ -9,14 +10,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginForm extends StatelessWidget {
   LoginForm({super.key});
-
-  void _logIn(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const ReportsPage(),
-      ),
-    );
-  }
 
   final _form = fb.group({
     'email': [
@@ -30,6 +23,22 @@ class LoginForm extends StatelessWidget {
     ],
     "password": [Validators.required],
   });
+
+  void _logIn(FormGroup form, BuildContext context) {
+    if (form.valid) {
+      final login = form.value['email'] as String;
+      final password = form.value['password'] as String;
+
+      context.read<UserBloc>().add(
+            AuthLoginRequested(
+              login: login,
+              password: password,
+            ),
+          );
+    } else {
+      form.markAllAsTouched();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +60,13 @@ class LoginForm extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(0, 2, 0, 88),
               child: const ForgotPasswordButton(),
             ),
-            SubmitButton(
-              text: "Log in",
-              onSubmit: () => _logIn(context),
+            BlocBuilder<UserBloc, UserState>(
+              builder: (blocContext, state) {
+                return SubmitButton(
+                  text: "Log in",
+                  onSubmit: () => _logIn(form, blocContext),
+                );
+              },
             ),
           ],
         );
